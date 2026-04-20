@@ -44,7 +44,7 @@ app.use(cookieParser())
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; connect-src 'self' http://localhost:3000 http://localhost:5173 ws://localhost:3000 ws://localhost:5173"
+    "default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:"
   );
   next();
 });
@@ -54,15 +54,20 @@ app.use("/api/users", userRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/reports", reportRoutes);
 
+// serve static files from "uploads" folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
+
+// Serve static files from the React app build directory
+app.use(express.static(path.join(__dirname, "../frontend/dist")))
+
+// Catch all handler: send back React's index.html file for any non-API routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-
-// serve static files from "uploads" folder
-app.use("/uploads", express.static(path.join(__dirname, "uploads")))
-app.get("/", (req, res) => {
-  res.send("API is running...");
 });
 
 app.use((err, req, res, next) => {
