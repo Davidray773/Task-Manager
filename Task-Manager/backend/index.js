@@ -44,7 +44,7 @@ app.use(cookieParser())
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:"
+    "default-src 'self' https://task-manager-frontend-dvcj.onrender.com; connect-src 'self' https:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:"
   );
   next();
 });

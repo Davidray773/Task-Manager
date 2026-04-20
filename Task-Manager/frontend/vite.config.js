@@ -13,18 +13,15 @@ export default defineConfig({
   csp: {
     reportOnly: false,
     policy: {
-      'default-src': ["'self'"],
-      'script-src': ["'self'"],
+      'default-src': ["'self'", 'https:'],
+      'script-src': ["'self'", "'unsafe-inline'"],
       'connect-src': [
         "'self'",
-        'http://localhost:*',
-        'ws://localhost:*',
-        'https://task-manager-srak.onrender.com'
+        'https:'
       ],
       'img-src': [
         "'self'",
-        'http://localhost:*',
-        'https://task-manager-srak.onrender.com',
+        'https:',
         'data:'
       ],
       'style-src': [
@@ -32,7 +29,7 @@ export default defineConfig({
         "'unsafe-inline'",
         'https:'
       ],
-      'font-src': ["'self' data: https: data:"]
+      'font-src': ["'self'", 'data:', 'https:']
     }
   },
   rewrites: [
