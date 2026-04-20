@@ -32,5 +32,8 @@ export default defineConfig({
       ],
       'font-src': ["'self' data: https: data:"]
     }
-  }
+  },
+  rewrites: [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 })
