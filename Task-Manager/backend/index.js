@@ -30,7 +30,7 @@ const app = express()
 // Middleware to handle cors
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174","http://localhost:5176"],
+    origin: [process.env.FRONT_END_URL, "http://localhost:5173", "http://localhost:5174","http://localhost:5176"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -54,8 +54,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/reports", reportRoutes);
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 // serve static files from "uploads" folder
