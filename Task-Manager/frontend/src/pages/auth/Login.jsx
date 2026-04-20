@@ -49,13 +49,14 @@ const Login = () => {
 
       console.log("LOGIN RESPONSE:", response.data)
 
-      // ✅ FIX 1: Extract user correctly
-      const user = response.data
+      // ✅ FIX 1: Extract user and token correctly
+      const { token, ...user } = response.data
 
-      // ✅ FIX 2: Store correct user in Redux
+      // ✅ FIX 2: Store token in localStorage
+      localStorage.setItem("token", token)
+
+      // ✅ FIX 3: Store user in Redux and localStorage
       dispatch(signInSuccess(user))
-
-      // ✅ OPTIONAL: Save to localStorage (prevents logout on refresh)
       localStorage.setItem("user", JSON.stringify(user))
 
       // ✅ FIX 3: Correct role check

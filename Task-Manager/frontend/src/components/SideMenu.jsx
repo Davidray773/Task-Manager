@@ -28,6 +28,10 @@ const SideMenu = ({ activeMenu }) => {
       const response = await axiosInstance.post("/auth/sign-out")
 
       if (response.data) {
+        // Clear token and user from localStorage
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        
         dispatch(signOutSuccess())
 
         navigate("/login")
