@@ -18,11 +18,13 @@ export default defineConfig({
       'connect-src': [
         "'self'",
         'http://localhost:*',
-        'ws://localhost:*'
+        'ws://localhost:*',
+        'https://task-manager-srak.onrender.com'
       ],
       'img-src': [
         "'self'",
         'http://localhost:*',
+        'https://task-manager-srak.onrender.com',
         'data:'
       ],
       'style-src': [
