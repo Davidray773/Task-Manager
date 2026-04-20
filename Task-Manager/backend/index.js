@@ -57,12 +57,8 @@ app.use("/api/reports", reportRoutes);
 // serve static files from "uploads" folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
-// Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, "../frontend/dist")))
-
-// Catch all handler: send back React's index.html file for any non-API routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+app.get("/", (req, res) => {
+  res.send("API is running...");
 });
 
 const PORT = process.env.PORT || 3000;
